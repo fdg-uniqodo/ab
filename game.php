@@ -8,6 +8,10 @@ class Game
     /** @var Dealer */
     public $dealer;
 
+//    public $startCondition;
+//
+//    public $endCondition;
+
     /**
      * @var array
      */
@@ -15,6 +19,12 @@ class Game
         'A' => 0.5,
         'B' => 0.5,
     ];
+
+//    public function __construct($startCondition, $endCondition)
+//    {
+//        $this->startCondition = $startCondition;
+//        $this->endCondition = $endCondition;
+//    }
 
     public function play()
     {
@@ -124,3 +134,18 @@ class Player {
         $this->card = $card;
     }
 }
+
+//interface Condition
+//{
+//    public function met($input);
+//}
+//
+//class StartCondition
+//{
+//
+//}
+//
+//class EndCondition
+//{
+//
+//}
