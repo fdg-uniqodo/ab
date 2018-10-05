@@ -44,7 +44,7 @@ class Game
     /**
      * @return Deck
      */
-    public function getNewDeck()
+    public function refreshDeck()
     {
         return new Deck($this->distribution);
     }
@@ -98,7 +98,7 @@ class Dealer {
     public function __construct(Game $game)
     {
         $this->game = $game;
-        $this->deck = $game->getNewDeck();
+        $this->deck = $game->refreshDeck();
     }
 
     /**
@@ -107,7 +107,7 @@ class Dealer {
     public function deal(Player $player)
     {
         if ($this->deck->isEmpty()) {
-            $this->deck = $this->game->getNewDeck();
+            $this->deck = $this->game->refreshDeck();
         }
         $player->acceptCard($this->deck->getCard());
     }
