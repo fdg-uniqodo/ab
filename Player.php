@@ -11,6 +11,7 @@ class Player extends AbstractPerson {
      */
     public function __construct(Person $person)
     {
+        $this->id = $person->getId();
     }
 
     /**
