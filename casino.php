@@ -5,4 +5,8 @@ $game = new Game(
     new \DateTime('+1 minutes')
 );
 
-$game->play();
+while ($game->inProgress()) {
+    $game->play(new Guest());
+}
+
+var_dump($game->players);
