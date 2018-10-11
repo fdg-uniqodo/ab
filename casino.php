@@ -1,4 +1,8 @@
 <?php
 
-$game = new Game();
+$game = new Game(
+    new \DateTime(),
+    new \DateTime('+1 minutes')
+);
+
 $game->play();

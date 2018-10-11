@@ -8,29 +8,35 @@ class Game
     /** @var Dealer */
     public $dealer;
 
-//    public $startCondition;
-//
-//    public $endCondition;
+    /** @var DateTime */
+    public $endCondition;
 
-    /**
-     * @var array
-     */
+    /** @var DateTime */
+    public $startCondition;
+
+    /** @var array */
     public $distribution = [
         'A' => 0.5,
         'B' => 0.5,
     ];
 
-//    public function __construct($startCondition, $endCondition)
-//    {
-//        $this->startCondition = $startCondition;
-//        $this->endCondition = $endCondition;
-//    }
-
-    public function play()
+    /**
+     * @param DateTime $startCondition
+     * @param DateTime $endCondition
+     */
+    public function __construct(DateTime $startCondition, DateTime $endCondition)
     {
-        while ($this->inProgress()) {
-            // @todo tune distribution here
-            $this->join(new Player());
+        $this->startCondition = $startCondition;
+        $this->endCondition = $endCondition;
+        $this->dealer = new Dealer($this);
+    }
+
+    public function play(Guest $guest)
+    {
+        if ($this->inProgress()) {
+            $this->join(new Player($guest));
+        } else {
+            throw new RuntimeException('Game is not currently in progress');
         }
     }
 
@@ -39,7 +45,8 @@ class Game
      */
     public function inProgress()
     {
-        return true;
+        $now = new DateTime();
+        return  $now >= $this->startCondition && $now <= $this->endCondition;
     }
 
     /**
@@ -54,24 +61,15 @@ class Game
     /**
      * @return Deck
      */
-    public function refreshDeck()
+    public function makeFreshDeck()
     {
-        return new Deck($this->distribution);
+        $newDeckDistribution = $this->distribution;
+
+//        // @todo here is where the dynamic distribution correction could happen
+//        $count = $this->dealer->cardCount;
+//        array_walk($newDeckDistribution, function ($val, $key) {
+//        });
+
+        return new Deck($newDeckDistribution);
     }
 }
-
-
-//interface Condition
-//{
-//    public function met($input);
-//}
-//
-//class StartCondition
-//{
-//
-//}
-//
-//class EndCondition
-//{
-//
-//}
