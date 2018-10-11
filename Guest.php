@@ -1,7 +1,6 @@
 <?php
 
 
-class Guest implements Person
+class Guest extends AbstractPerson
 {
-
 }

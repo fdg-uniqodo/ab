@@ -1,10 +1,14 @@
 <?php
 
 
-class Player {
+class Player extends AbstractPerson {
+
     /** @var string */
     public $card;
 
+    /**
+     * @param Person $person
+     */
     public function __construct(Person $person)
     {
     }
